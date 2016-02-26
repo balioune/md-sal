@@ -1,0 +1,27 @@
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="odl-notification-${project.version}" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-mdsal/${mdsal.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-restconf/${mdsal.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.dlux/features-dlux/${dlux.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/${openflow.plugin.version}/xml/features</repository>
+  <feature name="odl-notification-api" version="${project.version}" description="OpenDaylight :: notification :: api">
+    <feature version="${yangtools.version}">odl-yangtools-models</feature>
+    <bundle>mvn:org.opendaylight.notification/notification-api/${project.version}</bundle>
+  </feature>
+  <feature name="odl-notification" version="${project.version}" description="OpenDaylight :: notification">
+    <feature version="${mdsal.version}">odl-mdsal-broker</feature>
+    <feature version="${project.version}">odl-notification-api</feature>
+    <bundle>mvn:org.opendaylight.notification/notification-impl/${project.version}</bundle>
+    <bundle>mvn:org.opendaylight.controller.model/model-inventory/${mdsal.version}</bundle>
+    <configfile finalname="${configfile.directory}/notification.xml">mvn:org.opendaylight.notification/notification-impl/${project.version}/xml/config</configfile>
+  </feature>
+  <feature name="odl-notification-rest" version="${project.version}" description="OpenDaylight :: notification :: REST">
+    <feature version="${project.version}">odl-notification</feature>
+    <feature version="${mdsal.version}">odl-restconf</feature>
+  </feature>
+  <feature name="odl-notification-ui" version="${project.version}" description="OpenDaylight :: notification :: UI">
+    <feature version="${project.version}">odl-notification-rest</feature>
+    <feature version="${mdsal.version}">odl-mdsal-apidocs</feature>
+    <feature version="${mdsal.version}">odl-mdsal-xsql</feature>
+  </feature>
+</features>

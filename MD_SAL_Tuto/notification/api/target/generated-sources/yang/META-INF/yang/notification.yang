@@ -1,0 +1,9 @@
+module notification {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:notification";
+    prefix "notification";
+
+    revision "2015-01-05" {
+        description "Initial revision of notification model";
+    }
+}
